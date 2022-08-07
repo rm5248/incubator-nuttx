@@ -43,8 +43,8 @@
 
 /* LED Configuration ********************************************************/
 
-/* The PIC32MX Ethernet Starter kit has 3 user LEDs labelled LED1-3 on the
- * board graphics (but referred to as LED4-6 in the schematic):
+/* The Explorer 16 has 7 LEDs on the board.  We use the left most 3 LEDs in
+ * order to provide feedback to the user.
  *
  * PIN User's Guide  Board Stencil  Notes
  * --- ------------- -------------- -------------------------
@@ -68,9 +68,14 @@
  * LED_PANIC              5  ON   N/C  N/C  OFF  N/C  N/C
  */
 
-#define GPIO_LED_1   (GPIO_OUTPUT|GPIO_VALUE_ZERO|GPIO_PORTA|GPIO_PIN5)
+#define GPIO_LED_1   (GPIO_OUTPUT|GPIO_VALUE_ZERO|GPIO_PORTA|GPIO_PIN7)
 #define GPIO_LED_2   (GPIO_OUTPUT|GPIO_VALUE_ZERO|GPIO_PORTA|GPIO_PIN6)
-#define GPIO_LED_3   (GPIO_OUTPUT|GPIO_VALUE_ZERO|GPIO_PORTA|GPIO_PIN7)
+#define GPIO_LED_3   (GPIO_OUTPUT|GPIO_VALUE_ZERO|GPIO_PORTA|GPIO_PIN5)
+#define GPIO_LED_4   (GPIO_OUTPUT|GPIO_VALUE_ZERO|GPIO_PORTA|GPIO_PIN4)
+#define GPIO_LED_5   (GPIO_OUTPUT|GPIO_VALUE_ZERO|GPIO_PORTA|GPIO_PIN3)
+#define GPIO_LED_6   (GPIO_OUTPUT|GPIO_VALUE_ZERO|GPIO_PORTA|GPIO_PIN2)
+#define GPIO_LED_7   (GPIO_OUTPUT|GPIO_VALUE_ZERO|GPIO_PORTA|GPIO_PIN1)
+#define GPIO_LED_8   (GPIO_OUTPUT|GPIO_VALUE_ZERO|GPIO_PORTA|GPIO_PIN0)
 
 /* LED Management Definitions ***********************************************/
 
@@ -90,7 +95,11 @@ struct led_setting_s
   uint8_t led1   : 2;
   uint8_t led2   : 2;
   uint8_t led3   : 2;
-  uint8_t unused : 2;
+  uint8_t led4   : 2;
+  uint8_t led5   : 2;
+  uint8_t led6   : 2;
+  uint8_t led7   : 2;
+  uint8_t led8   : 2;
 };
 #endif
 
@@ -105,33 +114,34 @@ struct led_setting_s
 #ifdef CONFIG_ARCH_LEDS
 static const struct led_setting_s g_ledonvalues[LED_NVALUES] =
 {
-  {LED_OFF, LED_OFF, LED_OFF, LED_OFF},
-  {LED_ON,  LED_OFF, LED_NC,  LED_OFF},
-  {LED_OFF, LED_ON,  LED_NC,  LED_OFF},
-  {LED_ON,  LED_ON,  LED_NC,  LED_OFF},
-  {LED_NC,  LED_NC,  LED_ON,  LED_OFF},
-  {LED_ON,  LED_NC,  LED_NC,  LED_OFF},
+  {LED_OFF, LED_OFF, LED_OFF, LED_NC, LED_NC, LED_NC, LED_NC, LED_NC},
+  {LED_ON,  LED_OFF, LED_NC,  LED_NC, LED_NC, LED_NC, LED_NC, LED_NC},
+  {LED_OFF, LED_ON,  LED_NC,  LED_NC, LED_NC, LED_NC, LED_NC, LED_NC},
+  {LED_ON,  LED_ON,  LED_NC,  LED_NC, LED_NC, LED_NC, LED_NC, LED_NC},
+  {LED_NC,  LED_NC,  LED_ON,  LED_NC, LED_NC, LED_NC, LED_NC, LED_NC},
+  {LED_ON,  LED_NC,  LED_NC,  LED_NC, LED_NC, LED_NC, LED_NC, LED_NC},
 };
 
 static const struct led_setting_s g_ledoffvalues[LED_NVALUES] =
 {
-  {LED_NC,  LED_NC,  LED_NC,  LED_OFF},
-  {LED_NC,  LED_NC,  LED_NC,  LED_OFF},
-  {LED_NC,  LED_NC,  LED_NC,  LED_OFF},
-  {LED_NC,  LED_NC,  LED_NC,  LED_OFF},
-  {LED_NC,  LED_NC,  LED_OFF, LED_OFF},
-  {LED_OFF, LED_NC,  LED_NC,  LED_OFF},
+  {LED_NC,  LED_NC,  LED_NC,  LED_NC, LED_NC, LED_NC, LED_NC, LED_NC},
+  {LED_NC,  LED_NC,  LED_NC,  LED_NC, LED_NC, LED_NC, LED_NC, LED_NC},
+  {LED_NC,  LED_NC,  LED_NC,  LED_NC, LED_NC, LED_NC, LED_NC, LED_NC},
+  {LED_NC,  LED_NC,  LED_NC,  LED_NC, LED_NC, LED_NC, LED_NC, LED_NC},
+  {LED_NC,  LED_NC,  LED_OFF, LED_NC, LED_NC, LED_NC, LED_NC, LED_NC},
+  {LED_OFF, LED_NC,  LED_NC,  LED_NC, LED_NC, LED_NC, LED_NC, LED_NC},
 };
 
 /* If CONFIG_ARCH_LEDS is not defined, then the user can control the LEDs in
- * any way.  The following array simply maps the PIC32MX_STARTERKIT_LEDn
+ * any way.  The following array simply maps the PIC32MX_EXPLORER16_LEDn
  * index values to the correct LED pin configuration.
  */
 
 #else
-static const uint16_t g_ledpincfg[PIC32MX_STARTERKIT_NLEDS] =
+static const uint16_t g_ledpincfg[PIC32MX_EXPLORER16_NLEDS] =
 {
-  GPIO_LED_1, GPIO_LED_2, GPIO_LED_3
+  GPIO_LED_1, GPIO_LED_2, GPIO_LED_3, GPIO_LED_4,
+  GPIO_LED_5, GPIO_LED_6, GPIO_LED_7, GPIO_LED_8
 };
 #endif
 
@@ -160,6 +170,31 @@ static void pic32mx_setleds(const struct led_setting_s *setting)
     {
       pic32mx_gpiowrite(GPIO_LED_3, setting->led3 == LED_ON);
     }
+
+  if (setting->led4 != LED_NC)
+    {
+      pic32mx_gpiowrite(GPIO_LED_4, setting->led4 == LED_ON);
+    }
+
+  if (setting->led5 != LED_NC)
+    {
+      pic32mx_gpiowrite(GPIO_LED_5, setting->led5 == LED_ON);
+    }
+
+  if (setting->led6 != LED_NC)
+    {
+      pic32mx_gpiowrite(GPIO_LED_6, setting->led6 == LED_ON);
+    }
+
+  if (setting->led7 != LED_NC)
+    {
+      pic32mx_gpiowrite(GPIO_LED_7, setting->led7 == LED_ON);
+    }
+
+  if (setting->led8 != LED_NC)
+    {
+      pic32mx_gpiowrite(GPIO_LED_8, setting->led8 == LED_ON);
+    }
 }
 #endif
 
@@ -179,7 +214,12 @@ uint32_t board_userled_initialize(void)
   pic32mx_configgpio(GPIO_LED_1);
   pic32mx_configgpio(GPIO_LED_2);
   pic32mx_configgpio(GPIO_LED_3);
-  return 3;
+  pic32mx_configgpio(GPIO_LED_4);
+  pic32mx_configgpio(GPIO_LED_5);
+  pic32mx_configgpio(GPIO_LED_6);
+  pic32mx_configgpio(GPIO_LED_7);
+  pic32mx_configgpio(GPIO_LED_8);
+  return 8;
 }
 #endif
 
@@ -190,7 +230,7 @@ uint32_t board_userled_initialize(void)
 #ifndef CONFIG_ARCH_LEDS
 void board_userled(int led, bool ledon)
 {
-  if ((unsigned)led < PIC32MX_STARTERKIT_NLEDS)
+  if ((unsigned)led < PIC32MX_EXPLORER16_NLEDS)
     {
       pic32mx_gpiowrite(g_ledpincfg[led], ledon);
     }
@@ -204,12 +244,22 @@ void board_userled(int led, bool ledon)
 #ifndef CONFIG_ARCH_LEDS
 void board_userled_all(uint32_t ledset)
 {
-  board_userled(PIC32MX_STARTERKIT_LED1,
-               (ledset & PIC32MX_STARTERKIT_LED1_BIT) != 0);
-  board_userled(PIC32MX_STARTERKIT_LED2,
-               (ledset & PIC32MX_STARTERKIT_LED2_BIT) != 0);
-  board_userled(PIC32MX_STARTERKIT_LED3,
-               (ledset & PIC32MX_STARTERKIT_LED3_BIT) != 0);
+  board_userled(PIC32MX_EXPLORER16_LED1,
+               (ledset & PIC32MX_EXPLORER16_LED1_BIT) != 0);
+  board_userled(PIC32MX_EXPLORER16_LED2,
+               (ledset & PIC32MX_EXPLORER16_LED2_BIT) != 0);
+  board_userled(PIC32MX_EXPLORER16_LED3,
+               (ledset & PIC32MX_EXPLORER16_LED3_BIT) != 0);
+  board_userled(PIC32MX_EXPLORER16_LED4,
+               (ledset & PIC32MX_EXPLORER16_LED4_BIT) != 0);
+  board_userled(PIC32MX_EXPLORER16_LED5,
+               (ledset & PIC32MX_EXPLORER16_LED5_BIT) != 0);
+  board_userled(PIC32MX_EXPLORER16_LED6,
+               (ledset & PIC32MX_EXPLORER16_LED6_BIT) != 0);
+  board_userled(PIC32MX_EXPLORER16_LED7,
+               (ledset & PIC32MX_EXPLORER16_LED7_BIT) != 0);
+  board_userled(PIC32MX_EXPLORER16_LED8,
+               (ledset & PIC32MX_EXPLORER16_LED8_BIT) != 0);
 }
 #endif
 
@@ -225,6 +275,11 @@ void pic32mx_led_initialize(void)
   pic32mx_configgpio(GPIO_LED_1);
   pic32mx_configgpio(GPIO_LED_2);
   pic32mx_configgpio(GPIO_LED_3);
+  pic32mx_configgpio(GPIO_LED_4);
+  pic32mx_configgpio(GPIO_LED_5);
+  pic32mx_configgpio(GPIO_LED_6);
+  pic32mx_configgpio(GPIO_LED_7);
+  pic32mx_configgpio(GPIO_LED_8);
 }
 #endif
 

@@ -18,8 +18,8 @@
  *
  ****************************************************************************/
 
-#ifndef __BOARDS_MIPS_PIC32MX_PIC32MX_STARTERKIT_SRC_PIC32MX_STARTERKIT_H
-#define __BOARDS_MIPS_PIC32MX_PIC32MX_STARTERKIT_SRC_PIC32MX_STARTERKIT_H
+#ifndef __BOARDS_MIPS_PIC32MX_PIC32MX_STARTERKIT_SRC_PIC32MX_EXPLORER16_H
+#define __BOARDS_MIPS_PIC32MX_PIC32MX_STARTERKIT_SRC_PIC32MX_EXPLORER16_H
 
 /****************************************************************************
  * Included Files
@@ -33,26 +33,24 @@
 
 /* Configuration ************************************************************/
 
-/* The PIC32 starter kit has 3 user LEDs
+/* The Explorer 16 has 8 LEDs(D3-D10 on the schematic)
  *
- *   RD0          User LED D4 (high illuminates)
- *   RD2          User LED D5 (high illuminates)
- *   RD1          User LED D6 (high illuminates)
- *
- * There are 5 LEDs available on the MEB:
- *
- *   RD1          LED1
- *   RD2          LED2
- *   RD3          LED3
- *   RC1          LED4
- *   RC2          LED5
+ *   RA0          User LED D3 (high illuminates)
+ *   RA1          User LED D4 (high illuminates)
+ *   RA2          User LED D5 (high illuminates)
+ *   RA3          User LED D6 (high illuminates)
+ *   RA4          User LED D7 (high illuminates)
+ *   RA5          User LED D8 (high illuminates)
+ *   RA6          User LED D9 (high illuminates)
+ *   RA7          User LED D10 (high illuminates)
  */
 
-/* The PIC32 starter kit has 3 switches:
+/* The Explorer 16 has 4 switches
  *
- *   RD7            Switch SW2 (low when closed)
- *   RD6            Switch SW1 (low when closed)
- *   RD13           Switch SW3 (low when closed)
+ *   RD6            Switch S3 (low when closed)
+ *   RD7            Switch S6 (low when closed)
+ *   RA7            Switch S5 (low when closed)
+ *   RD13           Switch S4 (low when closed)
  */
 
 /****************************************************************************
@@ -107,4 +105,4 @@ void pic32mx_led_initialize(void);
 #endif
 
 #endif /* __ASSEMBLY__ */
-#endif /* __BOARDS_MIPS_PIC32MX_PIC32MX_STARTERKIT_SRC_PIC32MX_STARTERKIT_H */
+#endif /* __BOARDS_MIPS_PIC32MX_PIC32MX_STARTERKIT_SRC_PIC32MX_EXPLORER16_H */

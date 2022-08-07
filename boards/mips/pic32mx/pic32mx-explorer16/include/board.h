@@ -94,39 +94,33 @@
 /* LED Configuration ********************************************************/
 
 /* The Explorer16 has 8 user LEDs
- *
- * PIN User's Guide  Board Stencil  Notes
- * --- ------------- -------------- -------------------------
- * RD0 "User LED D4" "LED1 (RD0")   High illuminates (RED)
- * RD2 "User LED D5" "LED3 (RD2)"   High illuminates (YELLOW)
- * RD1 "User LED D6" "LED2 (RD1)"   High illuminates (GREEN)
- *
- * We will use the labels on the board to identify LEDs
- *
- * There are 5 additional LEDs available on the MEB (but not used by NuttX):
- *
- *   RD1          LED1
- *   RD2          LED2
- *   RD3          LED3
- *   RC1          LED4
- *   RC2          LED5
  */
 
 /* LED index values for use with board_userled() */
 
-#define PIC32MX_STARTERKIT_LED1     0
-#define PIC32MX_STARTERKIT_LED2     1
-#define PIC32MX_STARTERKIT_LED3     2
-#define PIC32MX_STARTERKIT_NLEDS    3
+#define PIC32MX_EXPLORER16_LED1     0
+#define PIC32MX_EXPLORER16_LED2     1
+#define PIC32MX_EXPLORER16_LED3     2
+#define PIC32MX_EXPLORER16_LED4     3
+#define PIC32MX_EXPLORER16_LED5     4
+#define PIC32MX_EXPLORER16_LED6     5
+#define PIC32MX_EXPLORER16_LED7     6
+#define PIC32MX_EXPLORER16_LED8     7
+#define PIC32MX_EXPLORER16_NLEDS    8
 
 /* LED bits for use with board_userled_all() */
 
-#define PIC32MX_STARTERKIT_LED1_BIT (1 << PIC32MX_STARTERKIT_LED1)
-#define PIC32MX_STARTERKIT_LED2_BIT (1 << PIC32MX_STARTERKIT_LED2)
-#define PIC32MX_STARTERKIT_LED3_BIT (1 << PIC32MX_STARTERKIT_LED3)
+#define PIC32MX_EXPLORER16_LED1_BIT (1 << PIC32MX_EXPLORER16_LED1)
+#define PIC32MX_EXPLORER16_LED2_BIT (1 << PIC32MX_EXPLORER16_LED2)
+#define PIC32MX_EXPLORER16_LED3_BIT (1 << PIC32MX_EXPLORER16_LED3)
+#define PIC32MX_EXPLORER16_LED4_BIT (1 << PIC32MX_EXPLORER16_LED4)
+#define PIC32MX_EXPLORER16_LED5_BIT (1 << PIC32MX_EXPLORER16_LED5)
+#define PIC32MX_EXPLORER16_LED6_BIT (1 << PIC32MX_EXPLORER16_LED6)
+#define PIC32MX_EXPLORER16_LED7_BIT (1 << PIC32MX_EXPLORER16_LED7)
+#define PIC32MX_EXPLORER16_LED8_BIT (1 << PIC32MX_EXPLORER16_LED8)
 
-/* If CONFIG_ARCH_LEDs is defined, then NuttX will control the 3 LEDs
- * on board the Ethernet Starter Kit.  The following definitions
+/* If CONFIG_ARCH_LEDs is defined, then NuttX will control 3 of the LEDs
+ * on board the Explorer 16.  The following definitions
  * describe how NuttX controls the LEDs:
  *
  *                           ON                  OFF
@@ -156,11 +150,12 @@
 
 /* Switch definitions *******************************************************/
 
-/* The PIC32 starter kit has 3 switches:
+/* The Explorer 16 has 4 switches
  *
- *   RD7            Switch SW2 (low when closed)
- *   RD6            Switch SW1 (low when closed)
- *   RD13           Switch SW3 (low when closed)
+ *   RD6            Switch S3 (low when closed)
+ *   RD7            Switch S6 (low when closed)
+ *   RA7            Switch S5 (low when closed)
+ *   RD13           Switch S4 (low when closed)
  */
 
 /****************************************************************************
