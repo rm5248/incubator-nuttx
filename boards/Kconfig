@@ -1138,6 +1138,16 @@ config ARCH_BOARD_PIC32MX_STARTERKIT
 		(DM320004) with the Multimedia Expansion Board (MEB, DM320005).
 		See www.microchip.com for further information.
 
+config ARCH_BOARD_PIC32MX_EXPLORER16
+	bool "Microchip PIC32MX Explorer16(DM240001)"
+	depends on ARCH_CHIP_PIC32MX795F512L
+	select ARCH_HAVE_LEDS
+	---help---
+		This is the port of NuttX to the Microchip PIC32 Explorer16
+		(DM240001).  This may also work with the newer Explorer16/32,
+		(DM240001-2).
+		See www.microchip.com for further information.
+
 config ARCH_BOARD_PIC32MX7MMB
 	bool "Mikroelektronika PIC32MX7 MMB"
 	depends on ARCH_CHIP_PIC32MX795F512L
@@ -2707,6 +2717,7 @@ config ARCH_BOARD
 	default "pcduino-a10"              if ARCH_BOARD_PCDUINO_A10
 	default "beaglebone-black"         if ARCH_BOARD_BEAGLEBONE_BLACK
 	default "pic32mx-starterkit"       if ARCH_BOARD_PIC32MX_STARTERKIT
+	default "pic32mx-explorer16"       if ARCH_BOARD_PIC32MX_EXPLORER16
 	default "pic32mx7mmb"              if ARCH_BOARD_PIC32MX7MMB
 	default "pic32mz-starterkit"       if ARCH_BOARD_PIC32MZ_STARTERKIT
 	default "qemu-i486"                if ARCH_BOARD_QEMU_I486
@@ -3473,6 +3484,9 @@ source "boards/mips/pic32mx/mirtoo/Kconfig"
 endif
 if ARCH_BOARD_PIC32MX_STARTERKIT
 source "boards/mips/pic32mx/pic32mx-starterkit/Kconfig"
+endif
+if ARCH_BOARD_PIC32MX_EXPLORER16
+source "boards/mips/pic32mx/pic32mx-explorer16/Kconfig"
 endif
 if ARCH_BOARD_PIC32MX7MMB
 source "boards/mips/pic32mx/pic32mx7mmb/Kconfig"

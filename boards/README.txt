@@ -612,6 +612,12 @@ boards/mips/pic32mx/pic32mx-starterkit
   Starter Kit (DM320004) with the Multimedia Expansion Board (MEB, DM320005).
   See www.microchip.com for further information.
 
+boards/mips/pic32mx/pic32mx-explorer16
+  This directory contains the port of NuttX to the Microchip PIC32 Explorer16
+  development board (DM240001).  This may also work for the newer Explorer16/32
+  development board (DM240001-2).
+  See www.microchip.com for further information.
+
 boards/mips/pic32mx/pic32mx7mmb
   This directory will (eventually) contain the port of NuttX to the
   Mikroelektronika PIC32MX7 Multimedia Board (MMB).  See
