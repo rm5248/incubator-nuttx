@@ -58,7 +58,7 @@ endif
 
 CHIP_CSRCS  = pic32mx_irq.c pic32mx_decodeirq.c pic32mx_exception.c
 CHIP_CSRCS += pic32mx_gpio.c pic32mx_lowconsole.c pic32mx_lowinit.c
-CHIP_CSRCS += pic32mx_serial.c pic32mx_spi.c
+CHIP_CSRCS += pic32mx_serial.c pic32mx_spi.c pic32mx_adc.c
 
 # Configuration-dependent PIC32MX files
 

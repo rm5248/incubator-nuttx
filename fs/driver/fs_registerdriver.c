@@ -23,6 +23,7 @@
  ****************************************************************************/
 
 #include <nuttx/config.h>
+#include <debug.h>
 
 #include <sys/types.h>
 #include <errno.h>
@@ -69,13 +70,16 @@ int register_driver(FAR const char *path,
    * will have a momentarily bad structure.
    */
 
+_info("about to semtake\n");
   ret = inode_semtake();
   if (ret < 0)
     {
       return ret;
     }
 
+_info("about to reserve\n");
   ret = inode_reserve(path, mode, &node);
+_info("end reserve\n");
   if (ret >= 0)
     {
       /* We have it, now populate it with driver specific information.

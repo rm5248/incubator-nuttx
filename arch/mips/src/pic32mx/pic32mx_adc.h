@@ -228,6 +228,23 @@ extern "C"
 #define EXTERN extern
 #endif
 
+/****************************************************************************
+ * Public Functions
+ ****************************************************************************/
+
+/****************************************************************************
+ * Name: pic32mx_adc_initialize
+ *
+ * Description:
+ *   Initialize the adc
+ *
+ * Returned Value:
+ *   Valid can device structure reference on success; a NULL on failure
+ *
+ ****************************************************************************/
+
+struct adc_dev_s *pic32mx_adc_initialize(void);
+
 #undef EXTERN
 #ifdef __cplusplus
 }

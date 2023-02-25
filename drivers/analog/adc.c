@@ -710,7 +710,9 @@ int adc_register(FAR const char *path, FAR struct adc_dev_s *dev)
 
   /* Register the ADC character driver */
 
+ainfo("about reo register driver\n");
   ret = register_driver(path, &g_adc_fops, 0444, dev);
+ainfo("after register\n");
   if (ret < 0)
     {
       nxsem_destroy(&dev->ad_recv.af_sem);
